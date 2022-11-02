@@ -1,0 +1,20 @@
+{
+  "name": "pm2",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "scripts": {
+    "start": "node app.js",
+    "start-dev": "nodemon app.js",
+    "ac": "autocannon -c 6 http://localhost:5000",
+    "pm2start": "pm2 start app.js -i 2",
+    "pm2stop": "pm2 stop app.js",
+    "pm2monit": "pm2 monit"
+  },
+  "dependencies": {
+    "autocannon": "^7.10.0",
+    "express": "^4.18.2",
+    "nodemon": "^2.0.20",
+    "pm2": "^5.2.2"
+  }
+}
