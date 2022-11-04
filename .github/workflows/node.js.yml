@@ -29,18 +29,25 @@ jobs:
     - run: npm ci
     - run: npm run build --if-present
     - run: npm test
-    - name: SSH Remote Commands
-      uses: appleboy/ssh-action@v0.1.5
-      with:
-        key: ${{secrets.GOOGLE_CLOUD_VM_SSH}}
-        host: ${{secrets.GOOGLE_CLOUD_VM_IP}}
-        username: ${{secrets.GOOGLE_CLOUD_VM_USERNAME}}
-        script: |
-          pm2 delete all
-          cd /var/app/tdd-nodejs
-          git pull
-          npm install
-          pm2 start npm -- start
+      - uses: akhileshns/heroku-deploy@v3.12.12 # This is the action
+        with:
+          heroku_api_key: ${{secrets.HEROKU_API_KEY}}
+          heroku_app_name: "github-actions-cicd"
+          heroku_email: "naeemth02@gmail.com"
+
+      # - name: SSH Remote Commands
+      # - uses: actions/checkout@v2
+      # uses: appleboy/ssh-action@v0.1.5
+      # with:
+      #   key: ${{secrets.GOOGLE_CLOUD_VM_SSH}}
+      #   host: ${{secrets.GOOGLE_CLOUD_VM_IP}}
+      #   username: ${{secrets.GOOGLE_CLOUD_VM_USERNAME}}
+      #   script: |
+      #     pm2 delete all
+      #     cd /var/app/tdd-nodejs
+      #     git pull
+      #     npm install
+      #     pm2 start npm -- start
           
           
           
